@@ -80,6 +80,10 @@ install_base() {
 }
 
 install_x-ui() {
+    systemctl stop firewalld
+    systemctl stop ufw
+    systemctl disable firewalld
+    systemctl disable ufw    
     systemctl stop x-ui
     cd /usr/local/
     last_version=$(curl -Ls "https://api.github.com/repos/Nolimit-key/x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
